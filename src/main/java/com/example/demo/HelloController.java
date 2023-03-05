@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 public class HelloController {
     @FXML
@@ -28,8 +27,8 @@ public class HelloController {
  {
      String s=par1.getText();
      String s2=par2.getText();
-     int n1=Integer.parseInt(s);
-     int n2=Integer.parseInt(s2);
+     long n1=Long.parseLong(s);
+     long n2=Long.parseLong(s2);
      Object source=e.getSource();
      if (source.equals(add)) {
          answer.setText("Addition Of Numbers:="+ (n1 + n2));
@@ -39,25 +38,27 @@ public class HelloController {
      }
      if(source.equals(mul))
      {
-         answer.setText("Multiplication of Numbers  "+String.valueOf(n1*n2));
+         answer.setText("Multiplication of Numbers  "+ n1 * n2);
      }
      if(source.equals(div))
      {
 
-         answer.setText("Division of Numbers  "+String.valueOf(n1/n2));
+         answer.setText("Division of Numbers  "+ n1 / n2);
      }
 
  }
+
 @FXML
     public void parametersCheck() {
      String s=par1.getText();
      String s2=par2.getText();
-     if(s.trim().isEmpty()||s2.trim().isEmpty()||s.matches("\\D*")||s2.matches("\\D*"))
+     if(s.trim().isEmpty()||s2.trim().isEmpty()||!s.matches("^0|[1-9]\\d*")||!s2.matches("0|[1-9]\\d*"))
      {
          add.setDisable(true);
          sub.setDisable(true);
          mul.setDisable(true);
          div.setDisable(true);
+         answer.setText("");
          return;
      }
 
